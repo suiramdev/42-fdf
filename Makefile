@@ -6,14 +6,16 @@
 ##   By: mnouchet <mnouchet>                        +#+  +:+       +#+        ##
 ##                                                +#+#+#+#+#+   +#+           ##
 ##   Created: 2022/12/02 01:20:18 by mnouchet          #+#    #+#             ##
-##   Updated: 2022/12/17 15:55:03 by marvin           ###   ########.fr       ##
+##   Updated: 2022/12/17 16:04:34 by marvin           ###   ########.fr       ##
 ##                                                                            ##
 ## ########################################################################## ##
 
 NAME = fdf
 
 SOURCES_DIR = srcs
-SOURCES = main.c
+SOURCES = main.c utils/memory.c utils/read.c utils/string.c \
+		  renders/draw/pixel.c renders/color.c renders/map.c \
+		  loaders/map.c
 
 INCLUDES = -I./includes -I./libs
 LIBRARIES = -L/usr/X11/lib -lX11 -lXext -L./libs -lmlx
@@ -24,7 +26,7 @@ CC = cc -Wall -Werror -Wextra
 
 %.o: %.c
 	@$(CC) $(INCLUDES) -c $< -o $@
-	@echo "→ Compiling..."
+	@echo "→ Compiling $<"
 
 $(NAME): $(OBJECTS)
 	@$(CC) $(INCLUDES) $(OBJECTS) $(LIBRARIES) -o $(NAME)
@@ -32,11 +34,11 @@ $(NAME): $(OBJECTS)
 
 clean:
 	@rm -rf $(OBJECTS)
-	@echo "→ Removing objects..."
+	@echo "→ Removing objects"
 
 fclean: clean
 	@rm -rf $(NAME)
-	@echo "→ Removing binaries..."
+	@echo "→ Removing binaries"
 
 all: $(NAME)
 

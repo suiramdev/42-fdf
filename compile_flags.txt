@@ -1,4 +1,6 @@
 -I
 ./includes
 -I
-./libs
+./libs/mlx
+-I
+./libs/libft/includes

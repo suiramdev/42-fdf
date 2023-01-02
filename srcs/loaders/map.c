@@ -6,15 +6,92 @@
 /*   By: marvin <42.fr>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 18:28:08 by marvin            #+#    #+#             */
-/*   Updated: 2022/12/17 15:49:20 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/02 14:51:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdlib.h>
+#include <libft.h>
 #include "loaders.h"
-#include "utils.h"
+
+static t_cell	*last_cell(t_cell *cell)
+{
+	if (cell != NULL)
+		while (cell->next != NULL)
+			cell = cell->next;
+	return (cell);
+}
+
+static void	insert_cell(t_cell **cell, int height)
+{
+	t_cell	*new;
+	t_cell	*last;
+
+	new = malloc(sizeof(t_cell));
+	if (new)
+	{
+		new->height = height;
+		new->next = NULL;
+		last = last_cell(*cell);
+		if (last != NULL)
+			last->next = new;
+		else
+			*cell = new;
+	}
+}
+
+static int	insert_cells(t_map *map, char *line)
+{
+	int	i;
+	int j;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (line[i])
+	{
+		while (line[i] && (line[i] == ' ' || line[i] == '\n'))
+			i++;
+		if (line[i])
+		{
+			j = i;
+			while (line[j] && line[j] != ' ' && line[j] != '\n')
+				j++;
+			count++;
+			insert_cell(&map->data, ft_atoi(ft_substr(line, i, j - i)));
+			i = j;
+		}
+	}
+	return (count);
+}
+
+t_cell	*get_cell(t_map *map, int x, int y)
+{
+	int		cellX;
+	int		cellY;
+	t_cell	*cell;
+
+	if (x >= map->width || y >= map->height)
+		return (NULL);
+	cellX = 0;
+	cellY = 0;
+	cell = map->data;
+	while (cell != NULL)
+	{
+		if (cellX == x && cellY == y)
+			break ;
+		cell = cell->next;
+		cellX++;
+		if (cellX >= map->width)
+		{
+			cellX = 0;
+			cellY++;
+		}
+	}
+	return (cell);
+}
 
 t_map	*load_map(char *path)
 {
@@ -23,16 +100,19 @@ t_map	*load_map(char *path)
 	int		fd;
 
 	map = malloc(sizeof(t_map));
-	map->data = NULL;
-	map->width = 0;
-	map->height = 0;
-	fd = open(path, O_RDONLY);
-	while ((line = read_line(fd)) != NULL)
+	if (map)
 	{
-		map->width = ft_strlen(line);
-		ft_strreplace(&map->data, ft_strnjoin(map->data, line, map->width));
-		map->height++;
+		map->data = NULL;
+		map->height = 0;
+		map->width = 0;
+		fd = open(path, O_RDONLY);
+		while ((line = ft_gnl(fd)) != NULL)
+		{
+			map->width = insert_cells(map, line);
+			map->height++;
+			free(line);
+		}
+		close(fd);
 	}
-	close(fd);
 	return (map);
 }

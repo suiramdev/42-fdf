@@ -6,31 +6,36 @@
 ##   By: mnouchet <mnouchet>                        +#+  +:+       +#+        ##
 ##                                                +#+#+#+#+#+   +#+           ##
 ##   Created: 2022/12/02 01:20:18 by mnouchet          #+#    #+#             ##
-##   Updated: 2022/12/17 16:04:34 by marvin           ###   ########.fr       ##
+##   Updated: 2022/12/31 14:30:52 by marvin           ###   ########.fr       ##
 ##                                                                            ##
 ## ########################################################################## ##
 
 NAME = fdf
 
 SOURCES_DIR = srcs
-SOURCES = main.c utils/memory.c utils/read.c utils/string.c \
-		  renders/draw/pixel.c renders/color.c renders/map.c \
-		  loaders/map.c
-
-INCLUDES = -I./includes -I./libs
-LIBRARIES = -L/usr/X11/lib -lX11 -lXext -L./libs -lmlx
+SOURCES = main.c renders/draw/pixel.c renders/color.c renders/map.c loaders/map.c
 
 OBJECTS = $(addprefix $(SOURCES_DIR)/, $(SOURCES:%.c=%.o))
 
-CC = cc -Wall -Werror -Wextra
+CC = cc
+CFLAGS = -g3 -Wall -Werror -Wextra -Iincludes
+
+INCLUDES = -I./includes -I./libs/libft/includes -I./libs/mlx
+
+LIBRARIES = -L/usr/X11/lib -lX11 -lXext -L./libs/libft -lft -L./libs/mlx -lmlx
 
 %.o: %.c
-	@$(CC) $(INCLUDES) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 	@echo "→ Compiling $<"
 
-$(NAME): $(OBJECTS)
-	@$(CC) $(INCLUDES) $(OBJECTS) $(LIBRARIES) -o $(NAME)
-	@echo "\033[0;32m✓ READY"
+libs:
+	@$(MAKE) re -C ./libs/libft
+	@$(MAKE) all -C ./libs/mlx
+	@echo "→ Compiling libraries"
+
+$(NAME): libs $(OBJECTS)
+	@$(CC) $(CFLAGS) $(INCLUDES) $(LIBRARIES) $(OBJECTS) -o $(NAME)
+	@echo "\033[0;32m✓ $(NAME) READY"
 
 clean:
 	@rm -rf $(OBJECTS)
@@ -44,4 +49,4 @@ all: $(NAME)
 
 re: fclean all
 
-.PHONY = clean fclean all re
+.PHONY: libs clean fclean all re

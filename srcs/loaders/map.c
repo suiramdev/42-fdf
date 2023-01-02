@@ -6,7 +6,7 @@
 /*   By: marvin <42.fr>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 18:28:08 by marvin            #+#    #+#             */
-/*   Updated: 2023/01/02 14:51:45 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/02 15:39:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <libft.h>
+#include "globals.h"
 #include "loaders.h"
 
 static t_cell	*last_cell(t_cell *cell)
@@ -67,20 +68,20 @@ static int	insert_cells(t_map *map, char *line)
 	return (count);
 }
 
-t_cell	*get_cell(t_map *map, int x, int y)
+t_cell	*get_cell(t_map *map, t_vector pos)
 {
 	int		cellX;
 	int		cellY;
 	t_cell	*cell;
 
-	if (x >= map->width || y >= map->height)
+	if (pos.x >= map->width || pos.y >= map->height)
 		return (NULL);
 	cellX = 0;
 	cellY = 0;
 	cell = map->data;
 	while (cell != NULL)
 	{
-		if (cellX == x && cellY == y)
+		if (cellX == pos.x && cellY == pos.y)
 			break ;
 		cell = cell->next;
 		cellX++;

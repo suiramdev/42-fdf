@@ -6,7 +6,7 @@
 /*   By: mnouchet <mnouchet>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 05:34:29 by mnouchet          #+#    #+#             */
-/*   Updated: 2022/12/17 16:06:51 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/02 15:37:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 # define RENDERS_H
 
 #include "loaders.h"
-
-typedef struct s_vector
-{
-	int	x;
-	int	y;
-}	t_vector;
+#include "globals.h"
 
 typedef struct s_image
 {
@@ -30,6 +25,7 @@ typedef struct s_image
 }	t_image;
 
 int		rgb(int r, int g, int b);
+void	draw_pixel(t_image image, t_vector pos, int color);
 t_image	render_map(t_map *map);
 
 #endif

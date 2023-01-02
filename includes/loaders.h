@@ -6,12 +6,14 @@
 /*   By: marvin <42.fr>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 16:18:15 by marvin            #+#    #+#             */
-/*   Updated: 2022/12/31 21:37:34 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/02 15:39:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LOADERS_H
 # define LOADERS_H
+
+#include "globals.h"
 
 typedef struct s_cell
 {
@@ -27,6 +29,6 @@ typedef struct s_map
 }	t_map;
 
 t_map	*load_map(char *path);
-t_cell	*get_cell(t_map *map, int x, int y);
+t_cell	*get_cell(t_map *map, t_vector pos);
 
 #endif

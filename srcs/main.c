@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */ /*                                                    +:+ +:+         +:+     */
-/*   By: mnouchet <mnouchet>                        +#+  +:+       +#+        */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 04:54:54 by mnouchet          #+#    #+#             */
-/*   Updated: 2022/12/24 00:06:53 by marvin           ###   ########.fr       */
+/*   Created: 2023/01/06 22:19:44 by mnouchet          #+#    #+#             */
+/*   Updated: 2023/01/06 22:51:08 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include "globals.h"
-#include "loaders.h"
+#include "types/fdf.h"
+#include "types/map.h"
+#include "renders.h"
+#include <stdlib.h>
+#include <mlx.h>
 
-t_mlx	g_mlx;
+t_fdf	g_fdf;
 
 int	main(int argc, char **argv)
 {
@@ -23,10 +25,12 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 		return (EXIT_FAILURE);
-	//g_mlx.ptr = mlx_init();
-	//g_mlx.win = mlx_new_window(g_mlx.ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "fdf");
+	g_fdf.mlx = mlx_init();
+	g_fdf.win = mlx_new_window(g_fdf.mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "fdf");
 	map = load_map(argv[1]);
 	if (!map)
 		return (EXIT_FAILURE);
+	mlx_loop_hook(g_fdf.mlx, render_map, map);
+	mlx_loop(g_fdf.mlx);
 	return (EXIT_SUCCESS);
 }

@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pixel.c                                            :+:      :+:    :+:   */
+/*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnouchet <mnouchet>                        +#+  +:+       +#+        */
+/*   By: marvin <42.fr>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 17:25:52 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/06 20:25:00 by marvin           ###   ########.fr       */
+/*   Created: 2023/01/06 02:15:40 by marvin            #+#    #+#             */
+/*   Updated: 2023/01/06 20:14:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "types/image.h"
-#include "types/vector.h"
+#ifndef MAP_H
+# define MAP_H
 
-void	draw_pixel(t_image image, t_vector2 pos, int color)
+#include "vector.h"
+
+typedef struct s_tile
 {
-	char    *pixel;
+	t_vector3		pos;
+	struct s_tile	*next;
+}	t_tile;
 
-    pixel = image.data + (pos.y * image.size_line + pos.x * (image.bits_per_pixel / 8));
-	*(int *)pixel = color;
-}
+typedef struct s_map
+{
+	t_tile	*data;
+	int		width;
+	int		height;
+}	t_map;
+
+t_map	*load_map(char *path);
+
+#endif

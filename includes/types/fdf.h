@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pixel.c                                            :+:      :+:    :+:   */
+/*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnouchet <mnouchet>                        +#+  +:+       +#+        */
+/*   By: marvin <42.fr>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 17:25:52 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/06 20:25:00 by marvin           ###   ########.fr       */
+/*   Created: 2023/01/06 02:08:02 by marvin            #+#    #+#             */
+/*   Updated: 2023/01/06 20:21:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "types/image.h"
-#include "types/vector.h"
+#ifndef FDF_H
+# define FDF_H
 
-void	draw_pixel(t_image image, t_vector2 pos, int color)
+# ifndef WINDOW_WIDTH
+#  define WINDOW_WIDTH 800
+# endif
+
+# ifndef WINDOW_HEIGHT
+#  define WINDOW_HEIGHT 600
+# endif
+
+typedef struct s_fdf
 {
-	char    *pixel;
+	void	*mlx;
+	void	*win;
+}	t_fdf;
 
-    pixel = image.data + (pos.y * image.size_line + pos.x * (image.bits_per_pixel / 8));
-	*(int *)pixel = color;
-}
+#endif

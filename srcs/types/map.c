@@ -6,44 +6,43 @@
 /*   By: marvin <42.fr>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 18:28:08 by marvin            #+#    #+#             */
-/*   Updated: 2023/01/02 15:39:39 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/06 20:21:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdlib.h>
+#include "types/map.h"
 #include <libft.h>
-#include "globals.h"
-#include "loaders.h"
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
 
-static t_cell	*last_cell(t_cell *cell)
+static t_tile	*last_tile(t_tile *tile)
 {
-	if (cell != NULL)
-		while (cell->next != NULL)
-			cell = cell->next;
-	return (cell);
+	if (tile != NULL)
+		while (tile->next != NULL)
+			tile = tile->next;
+	return (tile);
 }
 
-static void	insert_cell(t_cell **cell, int height)
+static void	insert_tile(t_map *map, t_vector3 pos)
 {
-	t_cell	*new;
-	t_cell	*last;
+	t_tile	*new;
+	t_tile	*last;
 
-	new = malloc(sizeof(t_cell));
+	new = malloc(sizeof(t_tile));
 	if (new)
 	{
-		new->height = height;
+		new->pos = pos;
 		new->next = NULL;
-		last = last_cell(*cell);
+		last = last_tile(map->data);
 		if (last != NULL)
 			last->next = new;
 		else
-			*cell = new;
+			map->data = new;
 	}
 }
 
-static int	insert_cells(t_map *map, char *line)
+static void	insert_tiles(t_map *map, char *line)
 {
 	int	i;
 	int j;
@@ -61,37 +60,13 @@ static int	insert_cells(t_map *map, char *line)
 			while (line[j] && line[j] != ' ' && line[j] != '\n')
 				j++;
 			count++;
-			insert_cell(&map->data, ft_atoi(ft_substr(line, i, j - i)));
+			insert_tile(map, (t_vector3){count, map->height, ft_atoi(ft_substr(line, i, j - i))});
 			i = j;
 		}
 	}
-	return (count);
-}
-
-t_cell	*get_cell(t_map *map, t_vector pos)
-{
-	int		cellX;
-	int		cellY;
-	t_cell	*cell;
-
-	if (pos.x >= map->width || pos.y >= map->height)
-		return (NULL);
-	cellX = 0;
-	cellY = 0;
-	cell = map->data;
-	while (cell != NULL)
-	{
-		if (cellX == pos.x && cellY == pos.y)
-			break ;
-		cell = cell->next;
-		cellX++;
-		if (cellX >= map->width)
-		{
-			cellX = 0;
-			cellY++;
-		}
-	}
-	return (cell);
+	map->width = count;
+	map->height++;
+	free(line);
 }
 
 t_map	*load_map(char *path)
@@ -108,11 +83,7 @@ t_map	*load_map(char *path)
 		map->width = 0;
 		fd = open(path, O_RDONLY);
 		while ((line = ft_gnl(fd)) != NULL)
-		{
-			map->width = insert_cells(map, line);
-			map->height++;
-			free(line);
-		}
+			insert_tiles(map, line);
 		close(fd);
 	}
 	return (map);

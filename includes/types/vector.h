@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pixel.c                                            :+:      :+:    :+:   */
+/*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnouchet <mnouchet>                        +#+  +:+       +#+        */
+/*   By: marvin <42.fr>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 17:25:52 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/06 20:25:00 by marvin           ###   ########.fr       */
+/*   Created: 2023/01/06 02:04:09 by marvin            #+#    #+#             */
+/*   Updated: 2023/01/06 20:11:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "types/image.h"
-#include "types/vector.h"
+#ifndef VECTOR_H
+# define VECTOR_H
 
-void	draw_pixel(t_image image, t_vector2 pos, int color)
+typedef struct s_vector2
 {
-	char    *pixel;
+	int	x;
+	int	y;
+}	t_vector2;
 
-    pixel = image.data + (pos.y * image.size_line + pos.x * (image.bits_per_pixel / 8));
-	*(int *)pixel = color;
-}
+typedef struct s_vector3
+{
+	int	x;
+	int	y;
+	int	z;
+}	t_vector3;
+
+#endif

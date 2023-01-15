@@ -6,7 +6,7 @@
 /*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 22:19:44 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/06 22:51:08 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/15 18:15:50 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 #include "types/map.h"
 #include "renders.h"
 #include <stdlib.h>
+#include <stdio.h>
 #include <mlx.h>
 
 t_fdf	g_fdf;
 
 int	main(int argc, char **argv)
 {
-	t_map	*map;
+	t_map		*map;
 
 	if (argc < 2)
 		return (EXIT_FAILURE);

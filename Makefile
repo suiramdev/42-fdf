@@ -6,7 +6,7 @@
 ##   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        ##
 ##                                                +#+#+#+#+#+   +#+           ##
 ##   Created: 2023/01/06 22:19:57 by mnouchet          #+#    #+#             ##
-##   Updated: 2023/01/06 22:52:32 by mnouchet         ###   ########.fr       ##
+##   Updated: 2023/01/15 16:05:30 by mnouchet         ###   ########.fr       ##
 ##                                                                            ##
 ## ########################################################################## ##
 
@@ -43,7 +43,6 @@ SRCS_DIR	:= srcs
 SRCS		:= main.c				\
 			   renders/draw/line.c	\
 			   renders/draw/pixel.c	\
-			   renders/draw/tile.c	\
 			   renders/map.c		\
 			   renders/color.c		\
 			   types/map.c
@@ -54,7 +53,7 @@ BUILD_DIR	:= .build
 OBJS		:= $(SRCS:$(SRCS_DIR)/%.c=$(BUILD_DIR)/%.o)
 
 CC			:= cc
-CFLAGS		:= -Wall -Wextra -Werror	
+CFLAGS		:= -g3 -Wall -Wextra -Werror	
 CPPFLAGS    := $(INCS:%=-I%)
 LDFLAGS     := $(addprefix -L,$(dir $(LIBS_TARGET))) -L /opt/X11/lib
 LDLIBS      := $(addprefix -l,$(LIBS)) -lX11 -lXext

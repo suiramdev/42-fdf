@@ -6,7 +6,7 @@
 /*   By: marvin <42.fr>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 18:28:08 by marvin            #+#    #+#             */
-/*   Updated: 2023/01/06 20:21:13 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/15 17:41:06 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,40 +16,39 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-static t_tile	*last_tile(t_tile *tile)
+static t_node	*last_node(t_node *node)
 {
-	if (tile != NULL)
-		while (tile->next != NULL)
-			tile = tile->next;
-	return (tile);
+	if (node != NULL)
+		while (node->next != NULL)
+			node = node->next;
+	return (node);
 }
 
-static void	insert_tile(t_map *map, t_vector3 pos)
+static void	insert_node(t_map *map, t_vector3 pos)
 {
-	t_tile	*new;
-	t_tile	*last;
+	t_node	*new;
+	t_node	*last;
 
-	new = malloc(sizeof(t_tile));
+	new = malloc(sizeof(t_node));
 	if (new)
 	{
 		new->pos = pos;
 		new->next = NULL;
-		last = last_tile(map->data);
+		last = last_node(map->nodes);
 		if (last != NULL)
 			last->next = new;
 		else
-			map->data = new;
+			map->nodes = new;
 	}
 }
 
-static void	insert_tiles(t_map *map, char *line)
+static void	fill_map(t_map *map, char *line)
 {
 	int	i;
 	int j;
-	int	count;
 
 	i = 0;
-	count = 0;
+	map->width = 0;
 	while (line[i])
 	{
 		while (line[i] && (line[i] == ' ' || line[i] == '\n'))
@@ -59,12 +58,11 @@ static void	insert_tiles(t_map *map, char *line)
 			j = i;
 			while (line[j] && line[j] != ' ' && line[j] != '\n')
 				j++;
-			count++;
-			insert_tile(map, (t_vector3){count, map->height, ft_atoi(ft_substr(line, i, j - i))});
+			insert_node(map, (t_vector3) { map->width, map->height, ft_atoi(ft_substr(line, i, j - i))});
+			map->width++;
 			i = j;
 		}
 	}
-	map->width = count;
 	map->height++;
 	free(line);
 }
@@ -78,13 +76,27 @@ t_map	*load_map(char *path)
 	map = malloc(sizeof(t_map));
 	if (map)
 	{
-		map->data = NULL;
+		map->nodes = NULL;
 		map->height = 0;
 		map->width = 0;
 		fd = open(path, O_RDONLY);
 		while ((line = ft_gnl(fd)) != NULL)
-			insert_tiles(map, line);
+			fill_map(map, line);
 		close(fd);
 	}
 	return (map);
+}
+
+int	node_height(t_map *map, t_vector2 from)
+{
+	t_node		*node;
+
+	node = map->nodes;
+	while (node != NULL)
+	{
+		if (node->pos.x == from.x && node->pos.y == from.y)
+			return (node->pos.z);
+		node = node->next;
+	}
+	return (0);
 }

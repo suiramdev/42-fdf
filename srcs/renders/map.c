@@ -17,40 +17,38 @@
 #include "globals.h"
 #include "renders.h"
 #include <mlx.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-# define TILE_WIDTH 50
-# define TILE_HEIGHT 25
+# define TILE_WIDTH 20
+# define TILE_HEIGHT 10
 # define HEIGHT_SCALE 2
 
-static t_vector2	node_pos(t_vector2 node, t_vector2 offset)
+static t_vector2	convert_pos(t_vector2 pos, t_vector2 offset)
 {
-	return (t_vector2) { offset.x + (node.x - node.y) * TILE_WIDTH / 2, offset.y + (node.x + node.y) * TILE_HEIGHT / 2 };
+	return (t_vector2) { offset.x + (pos.x - pos.y) * TILE_WIDTH / 2, offset.y + (pos.x + pos.y) * TILE_HEIGHT / 2 };
 }
 
 /*
  * We draw the edge between the current and the next node on Y and X axis
  */
-static void	draw_edges(t_map *map, t_vector2 from)
+static void	draw_node(t_map *map, t_node *node)
 {
 	t_vector2	offset;
-	t_vector2	next_r;
-	t_vector2	next_b;
 
-	offset = (t_vector2) { WINDOW_WIDTH / 3, WINDOW_HEIGHT / 3 };
-	next_r = (t_vector2) { from.x + 1, from.y };
-	next_b = (t_vector2) { from.x, from.y + 1 };
-	if (next_r.x < map->width)
+	offset = (t_vector2) { map->image.width / 2, map->image.height / 2 - (map->height * TILE_HEIGHT) / 2 };
+	if (node->next != NULL && node->next->pos.y == node->pos.y)
 		draw_line(
 			map->image,
-			node_pos(from, (t_vector2) { offset.x, offset.y - node_height(map, from) * HEIGHT_SCALE}),
-			node_pos(next_r, (t_vector2) { offset.x, offset.y - node_height(map, next_r) * HEIGHT_SCALE}),
+			convert_pos((t_vector2) { node->pos.x, node->pos.y }, (t_vector2) { offset.x, offset.y - node->pos.z * HEIGHT_SCALE}),
+			convert_pos((t_vector2) { node->next->pos.x, node->next->pos.y }, (t_vector2) { offset.x, offset.y - node->next->pos.z * HEIGHT_SCALE}),
 			rgb(0, 255, 0)
 		);
-	if (next_b.y < map->height)
+	if (node->under != NULL)
 		draw_line(
 			map->image,
-			node_pos(from, (t_vector2) { offset.x, offset.y - node_height(map, from) * HEIGHT_SCALE}),
-			node_pos(next_b, (t_vector2) { offset.x, offset.y - node_height(map, next_b) * HEIGHT_SCALE}),
+			convert_pos((t_vector2) { node->pos.x, node->pos.y }, (t_vector2) { offset.x, offset.y - node->pos.z * HEIGHT_SCALE}),
+			convert_pos((t_vector2) { node->under->pos.x, node->under->pos.y }, (t_vector2) { offset.x, offset.y - node->under->pos.z * HEIGHT_SCALE}),
 			rgb(0, 255, 0)
 		);
 }
@@ -61,20 +59,19 @@ static void	draw_edges(t_map *map, t_vector2 from)
  */
 int	render_map(t_map *map)
 {
-	t_vector2	node;
+	t_node	*node;
 
-	map->image.ptr = mlx_new_image(g_fdf.mlx, WINDOW_WIDTH, WINDOW_WIDTH);
+	if (map->image.ptr != NULL)
+		mlx_destroy_image(g_fdf.mlx, map->image.ptr);
+	map->image.width = WINDOW_WIDTH;
+	map->image.height = WINDOW_HEIGHT;
+	map->image.ptr = mlx_new_image(g_fdf.mlx, map->image.width, map->image.height);
 	map->image.data = mlx_get_data_addr(map->image.ptr, &map->image.bits_per_pixel, &map->image.size_line, &map->image.endian);
-	node.y = 0;
-	while (node.y < map->height)
+	node = map->nodes;
+	while (node != NULL)
 	{
-		node.x = 0;
-		while (node.x < map->width)
-		{
-			draw_edges(map, node);
-			node.x++;
-		}
-		node.y++;
+		draw_node(map, node);
+		node = node->next;
 	}
 	mlx_put_image_to_window(g_fdf.mlx, g_fdf.win, map->image.ptr, 0, 0);
 	return (0);

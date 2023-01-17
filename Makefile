@@ -6,7 +6,7 @@
 ##   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        ##
 ##                                                +#+#+#+#+#+   +#+           ##
 ##   Created: 2023/01/06 22:19:57 by mnouchet          #+#    #+#             ##
-##   Updated: 2023/01/15 16:05:30 by mnouchet         ###   ########.fr       ##
+##   Updated: 2023/01/16 19:46:54 by mnouchet         ###   ########.fr       ##
 ##                                                                            ##
 ## ########################################################################## ##
 
@@ -45,6 +45,7 @@ SRCS		:= main.c				\
 			   renders/draw/pixel.c	\
 			   renders/map.c		\
 			   renders/color.c		\
+			   types/node.c			\
 			   types/map.c
 
 SRCS		:= $(SRCS:%=$(SRCS_DIR)/%)

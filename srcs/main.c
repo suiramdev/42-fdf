@@ -6,7 +6,7 @@
 /*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 22:19:44 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/15 18:15:50 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/18 00:36:33 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,14 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 		return (EXIT_FAILURE);
-	g_fdf.mlx = mlx_init();
-	g_fdf.win = mlx_new_window(g_fdf.mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "fdf");
 	map = load_map(argv[1]);
 	if (!map)
 		return (EXIT_FAILURE);
+	g_fdf.mlx = mlx_init();
+	g_fdf.win = mlx_new_window(g_fdf.mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "fdf");
 	mlx_loop_hook(g_fdf.mlx, render_map, map);
 	mlx_loop(g_fdf.mlx);
+	mlx_destroy_window(g_fdf.mlx, g_fdf.win);
+	mlx_destroy_display(g_fdf.mlx);
 	return (EXIT_SUCCESS);
 }

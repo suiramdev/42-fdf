@@ -6,7 +6,7 @@
 /*   By: marvin <42.fr>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 02:15:40 by marvin            #+#    #+#             */
-/*   Updated: 2023/01/15 17:38:43 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/17 17:39:20 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,10 @@
 # define MAP_H
 
 #include "types/image.h"
+#include "types/node.h"
 #include "vector.h"
 
-typedef struct s_node
-{
-	t_vector3		pos;
-	struct s_node	*next;
-}	t_node;
+# define READ_SIZE 4096
 
 typedef struct s_map
 {

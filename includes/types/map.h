@@ -6,7 +6,7 @@
 /*   By: marvin <42.fr>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 02:15:40 by marvin            #+#    #+#             */
-/*   Updated: 2023/01/17 17:39:20 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/18 01:27:40 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,5 @@ typedef struct s_map
 }	t_map;
 
 t_map	*load_map(char *path);
-int		node_height(t_map *map, t_vector2 node);
 
 #endif

@@ -1,16 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnouchet <mnouchet>                        +#+  +:+       +#+        */
+/*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 05:33:04 by mnouchet          #+#    #+#             */
-/*   Updated: 2022/12/13 16:33:48 by marvin           ###   ########.fr       */
+/*   Created: 2023/01/18 02:31:37 by mnouchet          #+#    #+#             */
+/*   Updated: 2023/01/18 02:32:05 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	rgb(int r, int g, int b)
-{
-	return (r << 16 | g << 8 | b);
-}
+#ifndef COLOR_H
+# define COLOR_H
+
+int	rgb_color(int r, int g, int b);
+int	hexa_color(char *hexa);
+
+#endif

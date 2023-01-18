@@ -6,7 +6,7 @@
 /*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 19:06:52 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/17 20:52:26 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/18 02:07:16 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "stdlib.h"
 #include "types/vector.h"
 
-t_node	*new_node(t_node *nodes, t_vector3 pos)
+t_node	*new_node(t_node *nodes, t_vector3 pos, int color)
 {
 	t_node	*node;
 
@@ -23,6 +23,7 @@ t_node	*new_node(t_node *nodes, t_vector3 pos)
 	if (node)
 	{
 		node->pos = pos;
+		node->color = color;
 		node->under = nodes;
 		while (node->under != NULL)
 		{

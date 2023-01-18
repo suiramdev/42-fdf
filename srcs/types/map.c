@@ -6,44 +6,64 @@
 /*   By: marvin <42.fr>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 18:28:08 by marvin            #+#    #+#             */
-/*   Updated: 2023/01/17 20:56:19 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/18 02:35:17 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "types/map.h"
 #include "types/node.h"
 #include "types/vector.h"
+#include "types/color.h"
 #include <libft.h>
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
 
+/**
+ * Reads and parses the content of a map file, line by line, and fills the fields of a t_map struct
+ * with the data read from the file.
+ *
+ * @param map A pointer to a t_map struct that will be filled with the data read from the file.
+ * @parm line A string containing a line of text from the map file.
+ */
 static void	fill_map(t_map *map, char line[READ_SIZE + 1])
 {
-	int		i;
-	int		count;
+	t_vector3	pos;
+	int			color;
 
-	i = 0;
-	while (line[i])
+	while (*line)
 	{
-		while (line[i] && (line[i] == ' ' || line[i] == '\n'))
+		while (*line && (*line == ' ' || *line == '\n'))
 		{
-			if (line[i] == '\n')
+			if (*line == '\n' && *(line + 1))
 			{
-				map->width = count;
-				count = 0;
+				map->width = 0;
 				map->height++;
 			}
-			i++;
+			line++;
 		}
-		if (line[i])
-			insert_node(&map->nodes, new_node(map->nodes, (t_vector3) { count, map->height, ft_atoi(line + i) }));
-		count++;
-		while (line[i] && line[i] != ' ' && line[i] != '\n')
-			i++;
+		if (*line)
+		{
+			pos = (t_vector3) { map->width, map->height, ft_atoi(line) };
+			while (*line == '-' || ft_isdigit(*line))
+				line++;
+			color = rgb_color(255, 255, 255);
+			if (*line == ',' && *(line + 1) == '0' && *(line + 2) == 'x')
+				color = hexa_color(line + 3);
+			insert_node(&map->nodes, new_node(map->nodes, pos, color));
+			map->width++;
+			while (*line && *line != ' ' && *line != '\n')
+				line++;
+		}
 	}
 }
 
+/**
+ * Reads and parses a map file, and returns a pointer to a t_map struc containing the data read from the file.
+ *
+ * @param path The file path of the map file to be loaded.
+ * @return A pointer to the filled t_map struct.
+ */
 t_map	*load_map(char *path)
 {
 	t_map		*map;
@@ -60,24 +80,10 @@ t_map	*load_map(char *path)
 		fd = open(path, O_RDONLY);
 		while ((bytes = read(fd, line, READ_SIZE)) > 0)
 		{
-			line[bytes] = '\0'; // safety, not sure that we need it tho
+			line[bytes] = '\0';
 			fill_map(map, line);
 		}
 		close(fd);
 	}
 	return (map);
-}
-
-int	node_height(t_map *map, t_vector2 from)
-{
-	t_node	*node;
-
-	node = map->nodes;
-	while (node != NULL)
-	{
-		if (node->pos.x == from.x && node->pos.y == from.y)
-			return (node->pos.z);
-		node = node->next;
-	}
-	return (0);
 }

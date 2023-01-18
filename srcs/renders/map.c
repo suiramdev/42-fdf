@@ -20,8 +20,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-# define TILE_WIDTH 20
-# define TILE_HEIGHT 10
+# define TILE_WIDTH 40
+# define TILE_HEIGHT 20
 # define HEIGHT_SCALE 2
 
 static t_vector2	convert_pos(t_vector2 pos, t_vector2 offset)
@@ -42,14 +42,14 @@ static void	draw_node(t_map *map, t_node *node)
 			map->image,
 			convert_pos((t_vector2) { node->pos.x, node->pos.y }, (t_vector2) { offset.x, offset.y - node->pos.z * HEIGHT_SCALE}),
 			convert_pos((t_vector2) { node->next->pos.x, node->next->pos.y }, (t_vector2) { offset.x, offset.y - node->next->pos.z * HEIGHT_SCALE}),
-			rgb(0, 255, 0)
+			node->under->color	
 		);
 	if (node->under != NULL)
 		draw_line(
 			map->image,
 			convert_pos((t_vector2) { node->pos.x, node->pos.y }, (t_vector2) { offset.x, offset.y - node->pos.z * HEIGHT_SCALE}),
 			convert_pos((t_vector2) { node->under->pos.x, node->under->pos.y }, (t_vector2) { offset.x, offset.y - node->under->pos.z * HEIGHT_SCALE}),
-			rgb(0, 255, 0)
+			node->under->color
 		);
 }
 

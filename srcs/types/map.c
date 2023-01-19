@@ -6,7 +6,7 @@
 /*   By: marvin <42.fr>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 18:28:08 by marvin            #+#    #+#             */
-/*   Updated: 2023/01/19 03:19:58 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/19 03:24:35 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,12 @@ static void	fill_map(t_map *map, char line[READ_SIZE + 1])
 	{
 		while (*line && (*line == ' ' || *line == '\n'))
 		{
-			if (*line == '\n' && *(++line))
+			if (*line == '\n' && *(line + 1))
 			{
 				map->width = 0;
 				map->height++;
 			}
+			line++;
 		}
 		if (!*line)
 			break ;

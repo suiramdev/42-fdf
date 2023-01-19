@@ -6,7 +6,7 @@
 /*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 02:29:00 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/19 02:43:17 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/19 02:57:50 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define TILE_WIDTH 400
-#define TILE_HEIGHT 200
+#define TILE_WIDTH 20
+#define TILE_HEIGHT 10
 #define HEIGHT_SCALE 2
 
 static t_vector2	convert_pos(t_map *map, t_node *node)

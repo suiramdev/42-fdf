@@ -6,7 +6,7 @@
 /*   By: marvin <42.fr>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:29:11 by marvin            #+#    #+#             */
-/*   Updated: 2023/01/19 02:49:08 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/19 03:21:27 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 #include "renders.h"
 #include <libft.h>
 
+/**
+ * TODO: How can I split this motherfucker, and reduce args..
+ */
 void	draw_line(t_image image, t_vector2 start, t_vector2 end, int start_color, int end_color)
 {
 	t_vector2	distance;

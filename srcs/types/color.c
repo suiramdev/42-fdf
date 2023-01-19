@@ -6,11 +6,11 @@
 /*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 02:26:54 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/18 02:37:56 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/19 01:41:18 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 int	rgb_color(int r, int g, int b)
 {
@@ -38,4 +38,16 @@ int	hexa_color(char *hexa)
         hexa++;
     }
     return output;
+}
+
+int	lerp_color(int color1, int color2, int time)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	r = ft_lerp((color1 >> 16) & 0xff, (color2 >> 16 & 0xff), time);
+	g = ft_lerp((color1 >> 8) & 0xff, (color2 >> 8 & 0xff), time);
+	b = ft_lerp(color1 & 0xff, color2 & 0xff, time);
+	return (rgb_color(r, g, b));
 }

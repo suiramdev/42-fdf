@@ -6,16 +6,17 @@
 /*   By: marvin <42.fr>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:29:11 by marvin            #+#    #+#             */
-/*   Updated: 2023/01/17 19:13:33 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/19 01:28:38 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "types/image.h"
 #include "types/vector.h"
+#include "types/color.h"
 #include "renders.h"
 #include <libft.h>
 
-void	draw_line(t_image image, t_vector2 start, t_vector2 end, int color)
+void	draw_line(t_image image, t_vector2 start, t_vector2 end, int start_color, int end_color)
 {
 	t_vector2	distance;
 	t_vector2	step;
@@ -34,7 +35,7 @@ void	draw_line(t_image image, t_vector2 start, t_vector2 end, int color)
 		error = ft_abs(distance.x);
 		while (ft_abs(current.x - start.x) < ft_abs(distance.x))
 		{
-			draw_pixel(image, current, color);
+			draw_pixel(image, current, lerp_color(start_color, end_color, 0xff * ft_abs(current.x - start.x) / ft_abs(distance.x)));
 			current.x += step.x;
 			error -= ft_abs(distance.y);
 			if (error < 0)
@@ -49,7 +50,7 @@ void	draw_line(t_image image, t_vector2 start, t_vector2 end, int color)
 		error = ft_abs(distance.y);
 		while (ft_abs(current.y - start.y) < ft_abs(distance.y))
 		{
-			draw_pixel(image, current, color);
+			draw_pixel(image, current, lerp_color(start_color, end_color, 0xff * ft_abs(current.y - start.y) / ft_abs(distance.y)));
 			current.y += step.y;
 			error -= ft_abs(distance.x);
 			if (error < 0)

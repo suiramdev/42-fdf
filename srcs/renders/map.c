@@ -14,14 +14,15 @@
 #include "types/image.h"
 #include "types/vector.h"
 #include "types/map.h"
+#include "types/color.h"
 #include "globals.h"
 #include "renders.h"
 #include <mlx.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-# define TILE_WIDTH 40
-# define TILE_HEIGHT 20
+# define TILE_WIDTH 80
+# define TILE_HEIGHT 40
 # define HEIGHT_SCALE 2
 
 static t_vector2	convert_pos(t_vector2 pos, t_vector2 offset)
@@ -42,13 +43,15 @@ static void	draw_node(t_map *map, t_node *node)
 			map->image,
 			convert_pos((t_vector2) { node->pos.x, node->pos.y }, (t_vector2) { offset.x, offset.y - node->pos.z * HEIGHT_SCALE}),
 			convert_pos((t_vector2) { node->next->pos.x, node->next->pos.y }, (t_vector2) { offset.x, offset.y - node->next->pos.z * HEIGHT_SCALE}),
-			node->under->color	
+			node->color,
+			node->next->color
 		);
 	if (node->under != NULL)
 		draw_line(
 			map->image,
 			convert_pos((t_vector2) { node->pos.x, node->pos.y }, (t_vector2) { offset.x, offset.y - node->pos.z * HEIGHT_SCALE}),
 			convert_pos((t_vector2) { node->under->pos.x, node->under->pos.y }, (t_vector2) { offset.x, offset.y - node->under->pos.z * HEIGHT_SCALE}),
+			node->color,
 			node->under->color
 		);
 }

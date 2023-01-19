@@ -6,7 +6,7 @@
 /*   By: marvin <42.fr>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:29:11 by marvin            #+#    #+#             */
-/*   Updated: 2023/01/19 01:28:38 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/19 02:49:08 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	draw_line(t_image image, t_vector2 start, t_vector2 end, int start_color, i
 	t_vector2	step;
 	t_vector2	current;
 	int			error;
+	int			time;
 
 	distance = (t_vector2){end.x - start.x, end.y - start.y};
 	step = (t_vector2){1, 1};
@@ -35,7 +36,11 @@ void	draw_line(t_image image, t_vector2 start, t_vector2 end, int start_color, i
 		error = ft_abs(distance.x);
 		while (ft_abs(current.x - start.x) < ft_abs(distance.x))
 		{
-			draw_pixel(image, current, lerp_color(start_color, end_color, 0xff * ft_abs(current.x - start.x) / ft_abs(distance.x)));
+			time = 0xff * ft_abs(current.x - start.x) / ft_abs(distance.x);
+			draw_pixel(
+				image,
+				current,
+				lerp_color(start_color, end_color, time));
 			current.x += step.x;
 			error -= ft_abs(distance.y);
 			if (error < 0)
@@ -50,7 +55,11 @@ void	draw_line(t_image image, t_vector2 start, t_vector2 end, int start_color, i
 		error = ft_abs(distance.y);
 		while (ft_abs(current.y - start.y) < ft_abs(distance.y))
 		{
-			draw_pixel(image, current, lerp_color(start_color, end_color, 0xff * ft_abs(current.y - start.y) / ft_abs(distance.y)));
+			time = 0xff * ft_abs(current.y - start.y) / ft_abs(distance.y);
+			draw_pixel(
+				image,
+				current,
+				lerp_color(start_color, end_color, time));
 			current.y += step.y;
 			error -= ft_abs(distance.x);
 			if (error < 0)

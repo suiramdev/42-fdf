@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnouchet <mnouchet>                        +#+  +:+       +#+        */
+/*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 17:01:49 by mnouchet          #+#    #+#             */
-/*   Updatedh 2023/01/15 15:48:59 by mnouchet         ###   ########.fr       */
+/*   Created: 2023/01/19 02:29:00 by mnouchet          #+#    #+#             */
+/*   Updated: 2023/01/19 02:43:17 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,23 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-# define TILE_WIDTH 80
-# define TILE_HEIGHT 40
-# define HEIGHT_SCALE 2
+#define TILE_WIDTH 400
+#define TILE_HEIGHT 200
+#define HEIGHT_SCALE 2
 
-static t_vector2	convert_pos(t_vector2 pos, t_vector2 offset)
+static t_vector2	convert_pos(t_map *map, t_node *node)
 {
-	return (t_vector2) { offset.x + (pos.x - pos.y) * TILE_WIDTH / 2, offset.y + (pos.x + pos.y) * TILE_HEIGHT / 2 };
+	t_vector2	offset;
+
+	offset = (t_vector2){
+		map->image.width / 2,
+		map->image.height / 2 - (map->height * TILE_HEIGHT) / 2
+	};
+	offset.y -= node->pos.z * HEIGHT_SCALE;
+	return ((t_vector2){
+		offset.x + (node->pos.x - node->pos.y) * TILE_WIDTH / 2,
+		offset.y + (node->pos.x + node->pos.y) * TILE_HEIGHT / 2
+	});
 }
 
 /*
@@ -35,30 +45,26 @@ static t_vector2	convert_pos(t_vector2 pos, t_vector2 offset)
  */
 static void	draw_node(t_map *map, t_node *node)
 {
-	t_vector2	offset;
-
-	offset = (t_vector2) { map->image.width / 2, map->image.height / 2 - (map->height * TILE_HEIGHT) / 2 };
 	if (node->next != NULL && node->next->pos.y == node->pos.y)
 		draw_line(
 			map->image,
-			convert_pos((t_vector2) { node->pos.x, node->pos.y }, (t_vector2) { offset.x, offset.y - node->pos.z * HEIGHT_SCALE}),
-			convert_pos((t_vector2) { node->next->pos.x, node->next->pos.y }, (t_vector2) { offset.x, offset.y - node->next->pos.z * HEIGHT_SCALE}),
+			convert_pos(map, node),
+			convert_pos(map, node->next),
 			node->color,
-			node->next->color
-		);
+			node->next->color);
 	if (node->under != NULL)
 		draw_line(
 			map->image,
-			convert_pos((t_vector2) { node->pos.x, node->pos.y }, (t_vector2) { offset.x, offset.y - node->pos.z * HEIGHT_SCALE}),
-			convert_pos((t_vector2) { node->under->pos.x, node->under->pos.y }, (t_vector2) { offset.x, offset.y - node->under->pos.z * HEIGHT_SCALE}),
+			convert_pos(map, node),
+			convert_pos(map, node->under),
 			node->color,
-			node->under->color
-		);
+			node->under->color);
 }
 
 /*
  * This function renders a map struct on the window.
- * It creates an image, draws the lines on it, and displays the image on the window.
+ * It creates an image, draws the lines on it, and displays the image
+ * on the window.
  */
 int	render_map(t_map *map)
 {
@@ -68,8 +74,15 @@ int	render_map(t_map *map)
 		mlx_destroy_image(g_fdf.mlx, map->image.ptr);
 	map->image.width = WINDOW_WIDTH;
 	map->image.height = WINDOW_HEIGHT;
-	map->image.ptr = mlx_new_image(g_fdf.mlx, map->image.width, map->image.height);
-	map->image.data = mlx_get_data_addr(map->image.ptr, &map->image.bits_per_pixel, &map->image.size_line, &map->image.endian);
+	map->image.ptr = mlx_new_image(
+			g_fdf.mlx,
+			map->image.width,
+			map->image.height);
+	map->image.data = mlx_get_data_addr(
+			map->image.ptr,
+			&map->image.bits_per_pixel,
+			&map->image.size_line,
+			&map->image.endian);
 	node = map->nodes;
 	while (node != NULL)
 	{

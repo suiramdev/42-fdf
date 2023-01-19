@@ -6,7 +6,7 @@
 /*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 19:06:52 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/18 02:07:16 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/19 02:22:24 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_node	*new_node(t_node *nodes, t_vector3 pos, int color)
 		while (node->under != NULL)
 		{
 			if (node->under->pos.x == pos.x && node->under->pos.y == pos.y - 1)
-				break;
+				break ;
 			node->under = node->under->next;
 		}
 		node->next = NULL;
@@ -48,7 +48,8 @@ void	insert_node(t_node **to, t_node *node)
 {
 	t_node	*last;
 
-	if ((last = last_node(*to)) != NULL)
+	last = last_node(*to);
+	if (last != NULL)
 		last->next = node;
 	else
 		*to = node;
@@ -57,6 +58,7 @@ void	insert_node(t_node **to, t_node *node)
 void	empty_node(t_node *node)
 {
 	t_node	*next;
+
 	while (node != NULL)
 	{
 		next = node->next;

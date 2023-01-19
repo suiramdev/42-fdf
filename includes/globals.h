@@ -6,14 +6,14 @@
 /*   By: mnouchet <mnouchet>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 04:54:18 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/06 02:13:07 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/19 03:27:31 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GLOBALS_H
 # define GLOBALS_H
 
-#include "types/fdf.h"
+# include "types/fdf.h"
 
 extern t_fdf	g_fdf;
 

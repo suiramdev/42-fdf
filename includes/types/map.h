@@ -6,16 +6,16 @@
 /*   By: marvin <42.fr>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 02:15:40 by marvin            #+#    #+#             */
-/*   Updated: 2023/01/18 01:27:40 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/19 03:28:24 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_H
 # define MAP_H
 
-#include "types/image.h"
-#include "types/node.h"
-#include "vector.h"
+# include "types/image.h"
+# include "types/node.h"
+# include "vector.h"
 
 # define READ_SIZE 4096
 

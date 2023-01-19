@@ -6,14 +6,14 @@
 /*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 19:04:49 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/18 02:07:31 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/19 03:28:56 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIST_H
-# define LIST_H
+#ifndef NODE_H
+# define NODE_H
 
-#include "types/vector.h"
+# include "types/vector.h"
 
 typedef struct s_node
 {
@@ -21,7 +21,7 @@ typedef struct s_node
 	int				color;
 	struct s_node	*under;
 	struct s_node	*next;
-} t_node;
+}	t_node;
 
 t_node	*new_node(t_node *nodes, t_vector3 pos, int color);
 t_node	*last_node(t_node *node);

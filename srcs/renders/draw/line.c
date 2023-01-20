@@ -6,7 +6,7 @@
 /*   By: marvin <42.fr>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:29:11 by marvin            #+#    #+#             */
-/*   Updated: 2023/01/20 13:52:59 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/20 13:57:25 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	draw_line_y(t_image image, t_vector2 start, t_vector2 end,
 		draw_pixel(
 			image,
 			current,
-			lerp_color(gradient.to, gradient.from, time));
+			lerp_color(gradient.from, gradient.to, time));
 		current.y += step.y;
 		error -= ft_abs(distance.x);
 		if (error < 0)

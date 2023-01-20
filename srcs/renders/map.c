@@ -6,7 +6,7 @@
 /*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 02:29:00 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/19 02:57:50 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/20 13:52:29 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,13 @@ static void	draw_node(t_map *map, t_node *node)
 			map->image,
 			convert_pos(map, node),
 			convert_pos(map, node->next),
-			node->color,
-			node->next->color);
+			(t_gradient){node->color, node->next->color});
 	if (node->under != NULL)
 		draw_line(
 			map->image,
 			convert_pos(map, node),
 			convert_pos(map, node->under),
-			node->color,
-			node->under->color);
+			(t_gradient){node->color, node->under->color});
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: marvin <42.fr>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 18:28:08 by marvin            #+#    #+#             */
-/*   Updated: 2023/01/19 03:24:35 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/22 00:59:58 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ t_map	*load_map(char *path)
 			fill_map(map, line);
 		}
 		close(fd);
+		map->tile_width = 100;
+		map->tile_height = 50;
 	}
 	return (map);
 }

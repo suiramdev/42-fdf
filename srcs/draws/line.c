@@ -6,14 +6,14 @@
 /*   By: marvin <42.fr>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:29:11 by marvin            #+#    #+#             */
-/*   Updated: 2023/01/20 13:57:25 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/20 15:11:00 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "types/image.h"
 #include "types/vector.h"
 #include "types/color.h"
-#include "renders.h"
+#include "draws.h"
 #include <libft.h>
 
 static t_vector2	get_step(t_vector2 distance)

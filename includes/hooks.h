@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   globals.h                                          :+:      :+:    :+:   */
+/*   hooks.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnouchet <mnouchet>                        +#+  +:+       +#+        */
+/*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 04:54:18 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/19 03:27:31 by mnouchet         ###   ########.fr       */
+/*   Created: 2023/01/20 15:05:28 by mnouchet          #+#    #+#             */
+/*   Updated: 2023/01/22 01:54:42 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GLOBALS_H
-# define GLOBALS_H
+#ifndef HOOKS_H
+# define HOOKS_H
 
+# include "types/map.h"
 # include "types/fdf.h"
 
-extern t_fdf	g_fdf;
+int	render_map(t_map *map);
+int	mouse_hook(int key_code, t_fdf *fdf);
+int	key_hook(int key_code, t_fdf *fdf);
 
 #endif

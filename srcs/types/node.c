@@ -6,14 +6,14 @@
 /*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 19:06:52 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/19 02:22:24 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/22 01:53:37 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "types/map.h"
 #include "types/node.h"
-#include "stdlib.h"
 #include "types/vector.h"
+#include <stdlib.h>
 
 t_node	*new_node(t_node *nodes, t_vector3 pos, int color)
 {

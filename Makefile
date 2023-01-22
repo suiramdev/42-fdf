@@ -6,7 +6,7 @@
 ##   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        ##
 ##                                                +#+#+#+#+#+   +#+           ##
 ##   Created: 2023/01/06 22:19:57 by mnouchet          #+#    #+#             ##
-##   Updated: 2023/01/18 02:32:38 by mnouchet         ###   ########.fr       ##
+##   Updated: 2023/01/22 01:56:43 by mnouchet         ###   ########.fr       ##
 ##                                                                            ##
 ## ########################################################################## ##
 
@@ -41,9 +41,11 @@ INCS		:= includes				\
 
 SRCS_DIR	:= srcs
 SRCS		:= main.c				\
-			   renders/draw/line.c	\
-			   renders/draw/pixel.c	\
-			   renders/map.c		\
+			   draws/line.c			\
+			   draws/pixel.c		\
+			   draws/node.c			\
+			   hooks/renders.c		\
+			   hooks/inputs.c		\
 			   types/color.c		\
 			   types/node.c			\
 			   types/map.c

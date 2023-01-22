@@ -4,7 +4,12 @@
 fdf, which stands for Fil de Fer or Wireframe, is a project from the 42 School curriculum that displays a terrain based on file data.
 
 ## How to run
-Compile the solution with the Makefile provided, using the command `make re`. This will create an executable (for linux), which 
+The first thing to note is that this repo uses submodules. Once you have cloned it, run the following commands:
+```
+git submodule init
+git submodule update
+```
+From now, you can compile the solution with the Makefile provided, using the command `make re`. This will create an executable (for linux), which 
 you can run in the terminal, followed by the data file you want to display.
 ```
 make re && ./fdf maps/42.fdf

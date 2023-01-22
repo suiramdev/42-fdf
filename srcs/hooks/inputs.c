@@ -6,7 +6,7 @@
 /*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:48:19 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/22 04:23:01 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/22 21:10:35 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,20 @@
  * @param key_code An integer corresponding to the key actionned.
  * @param fdf
  */
-int	mouse_hook(int key_code, t_fdf *fdf)
+int	mouse_hook(int key_code, int x, int y, t_fdf *fdf)
 {
-	(void)key_code;
-	(void)fdf;
+	(void)x;
+	(void)y;
+	if (key_code == 4)
+	{
+		fdf->map->tile_width -= 1;
+		fdf->map->tile_height = fdf->map->tile_width / 2;
+	}
+	if (key_code == 5)
+	{
+		fdf->map->tile_width += 1;
+		fdf->map->tile_height = fdf->map->tile_width / 2;
+	}
 	return (0);
 }
 

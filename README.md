@@ -20,4 +20,4 @@ The data containing, represent the heights of the nodes, but also its colours by
 0 10         20 10 0
 0  0          0  0 0
 ```
-Also, note that it does not have to end with `.fdf`
+Also, note that it does not have to end with `.fdf` unlike the example maps.

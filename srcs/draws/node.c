@@ -6,7 +6,7 @@
 /*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 01:48:15 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/23 15:41:25 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/23 16:13:21 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "types/map.h"
 #include "draws.h"
 #include <stdlib.h>
-
 
 static t_vector2	convert_pos(t_map *map, t_node *node)
 {

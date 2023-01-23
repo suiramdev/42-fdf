@@ -6,7 +6,7 @@
 /*   By: marvin <42.fr>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 18:28:08 by marvin            #+#    #+#             */
-/*   Updated: 2023/01/23 15:41:36 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/23 16:13:10 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,24 +85,23 @@ t_map	*load_map(char *path)
 	int			bytes;
 
 	map = malloc(sizeof(t_map));
-	if (map)
+	if (!map)
+		return (NULL);
+	map->nodes = NULL;
+	map->height = 0;
+	map->width = 0;
+	fd = open(path, O_RDONLY);
+	while (1)
 	{
-		map->nodes = NULL;
-		map->height = 0;
-		map->width = 0;
-		fd = open(path, O_RDONLY);
-		while (1)
-		{
-			bytes = read(fd, line, READ_SIZE);
-			if (bytes <= 0)
-				break ;
-			line[bytes] = '\0';
-			fill_map(map, line);
-		}
-		close(fd);
-		map->tile_width = 100;
-		map->tile_height = 50;
-		map->height_scale = 2;
+		bytes = read(fd, line, READ_SIZE);
+		if (bytes <= 0)
+			break ;
+		line[bytes] = '\0';
+		fill_map(map, line);
 	}
+	close(fd);
+	map->tile_width = 100;
+	map->tile_height = 50;
+	map->height_scale = 2;
 	return (map);
 }

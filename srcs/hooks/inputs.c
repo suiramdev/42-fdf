@@ -6,13 +6,13 @@
 /*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:48:19 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/22 21:10:35 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/23 16:08:52 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include "types/fdf.h"
-#include <stdio.h>
+#include <stdlib.h>
 
 /**
  * Handle map's mouse events 
@@ -47,5 +47,16 @@ int	key_hook(int key_code, t_fdf *fdf)
 {
 	if (key_code == 65307)
 		mlx_loop_end(fdf->mlx);
+	return (0);
+}
+
+/**
+ * Handle window closing event
+ *
+ * @param fdf
+ */
+int	close_hook(t_fdf *fdf)
+{
+	mlx_loop_end(fdf->mlx);
 	return (0);
 }

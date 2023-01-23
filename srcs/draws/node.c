@@ -6,7 +6,7 @@
 /*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 01:48:15 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/22 01:51:04 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/23 15:41:25 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "draws.h"
 #include <stdlib.h>
 
-#define HEIGHT_SCALE 2
 
 static t_vector2	convert_pos(t_map *map, t_node *node)
 {
@@ -25,7 +24,7 @@ static t_vector2	convert_pos(t_map *map, t_node *node)
 		map->image.width / 2,
 		map->image.height / 2 - (map->height * map->tile_height) / 2
 	};
-	offset.y -= node->pos.z * HEIGHT_SCALE;
+	offset.y -= node->pos.z * map->height_scale;
 	return ((t_vector2){
 		offset.x + (node->pos.x - node->pos.y) * map->tile_width / 2,
 		offset.y + (node->pos.x + node->pos.y) * map->tile_height / 2

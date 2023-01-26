@@ -6,7 +6,7 @@
 /*   By: marvin <42.fr>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 02:15:40 by marvin            #+#    #+#             */
-/*   Updated: 2023/01/23 15:39:07 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/26 21:53:57 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include "types/image.h"
 # include "types/node.h"
 # include "vector.h"
-
-# define READ_SIZE 4096
 
 typedef struct s_map
 {

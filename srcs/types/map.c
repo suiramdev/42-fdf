@@ -6,7 +6,7 @@
 /*   By: marvin <42.fr>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 18:28:08 by marvin            #+#    #+#             */
-/*   Updated: 2023/01/23 16:13:10 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/26 21:53:25 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@
  * To be honest, this splitting was more for the norminette.
  *
  * @param line A string containing a line of text from the map file.
+ * @return The corresponding color integer value
  */
-static int	node_color(char *line)
+static int	extract_color(char *line)
 {
 	int	color;
 
@@ -43,31 +44,26 @@ static int	node_color(char *line)
  * data read from the file.
  * @parm line A string containing a line of text from the map file.
  */
-static void	fill_map(t_map *map, char line[READ_SIZE + 1])
+static void	fill_map(t_map *map, char *line)
 {
 	t_vector3	pos;
 
+	map->width = 0;
 	while (*line)
 	{
-		while (*line && (*line == ' ' || *line == '\n'))
-		{
-			if (*line == '\n' && *(line + 1))
-			{
-				map->width = 0;
-				map->height++;
-			}
+		while (*line && *line == ' ') 
 			line++;
-		}
 		if (!*line)
 			break ;
 		pos = (t_vector3){map->width, map->height, ft_atoi(line)};
 		while (*line == '-' || ft_isdigit(*line))
 			line++;
-		insert_node(&map->nodes, new_node(map->nodes, pos, node_color(line)));
+		insert_node(&map->nodes, new_node(map->nodes, pos, extract_color(line)));
 		map->width++;
-		while (*line && *line != ' ' && *line != '\n')
+		while (*line && *line != ' ')
 			line++;
 	}
+	map->height++;
 }
 
 /**
@@ -80,9 +76,8 @@ static void	fill_map(t_map *map, char line[READ_SIZE + 1])
 t_map	*load_map(char *path)
 {
 	t_map		*map;
-	static char	line[READ_SIZE + 1];
+	char		*line;
 	int			fd;
-	int			bytes;
 
 	map = malloc(sizeof(t_map));
 	if (!map)
@@ -91,13 +86,12 @@ t_map	*load_map(char *path)
 	map->height = 0;
 	map->width = 0;
 	fd = open(path, O_RDONLY);
-	while (1)
+	line = ft_gnl(fd);
+	while (line != NULL)
 	{
-		bytes = read(fd, line, READ_SIZE);
-		if (bytes <= 0)
-			break ;
-		line[bytes] = '\0';
 		fill_map(map, line);
+		free(line);
+		line = ft_gnl(fd);
 	}
 	close(fd);
 	map->tile_width = 100;

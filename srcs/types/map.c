@@ -6,7 +6,7 @@
 /*   By: marvin <42.fr>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 18:28:08 by marvin            #+#    #+#             */
-/*   Updated: 2023/01/26 21:53:25 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/26 21:56:32 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,6 @@
 #include <unistd.h>
 
 /**
- * Parses the colour of the given line into an integer.
- * To be honest, this splitting was more for the norminette.
- *
- * @param line A string containing a line of text from the map file.
- * @return The corresponding color integer value
- */
-static int	extract_color(char *line)
-{
-	int	color;
-
-	color = rgb_color(255, 255, 255);
-	if (*line == ',' && *(line + 1) == '0' && *(line + 2) == 'x')
-		color = hexa_color(line + 3);
-	return (color);
-}
-
-/**
  * Reads and parses the content of a map file, line by line, and fills
  * the fields of a t_map struct with the data read from the file.
  *
@@ -47,18 +30,25 @@ static int	extract_color(char *line)
 static void	fill_map(t_map *map, char *line)
 {
 	t_vector3	pos;
+	int			color;
 
 	map->width = 0;
 	while (*line)
 	{
-		while (*line && *line == ' ') 
+		while (*line && *line == ' ')
 			line++;
 		if (!*line)
 			break ;
 		pos = (t_vector3){map->width, map->height, ft_atoi(line)};
 		while (*line == '-' || ft_isdigit(*line))
 			line++;
-		insert_node(&map->nodes, new_node(map->nodes, pos, extract_color(line)));
+		color = rgb_color(255, 255, 255);
+		if (*line == ',' && *(line + 1) == '0' && *(line + 2) == 'x')
+		{
+			color = hexa_color(line + 3);
+			line += 3;
+		}
+		insert_node(&map->nodes, new_node(map->nodes, pos, color));
 		map->width++;
 		while (*line && *line != ' ')
 			line++;

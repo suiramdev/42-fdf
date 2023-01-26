@@ -6,7 +6,7 @@
 /*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 22:19:44 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/23 19:52:58 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/26 21:38:03 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,10 @@ static t_fdf	*init(char *path)
 	return (fdf);
 }
 
-int	main(int argc, char **argv, char **env)
+int	main(int argc, char **argv)
 {
 	t_fdf	*fdf;
 
-	if (!env || *env)
-		return (EXIT_FAILURE);
 	if (argc < 2)
 		return (EXIT_FAILURE);
 	fdf = init(argv[1]);

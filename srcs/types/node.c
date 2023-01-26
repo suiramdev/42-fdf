@@ -6,7 +6,7 @@
 /*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 19:06:52 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/22 01:53:37 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/26 22:07:11 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 #include "types/node.h"
 #include "types/vector.h"
 #include <stdlib.h>
+
+/**
+ * This is basically the chained list approach.
+ */
 
 t_node	*new_node(t_node *nodes, t_vector3 pos, int color)
 {

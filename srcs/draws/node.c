@@ -6,7 +6,7 @@
 /*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 01:48:15 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/23 16:13:21 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/26 22:03:55 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,12 @@ static t_vector2	convert_pos(t_map *map, t_node *node)
 	});
 }
 
-/*
- * We draw the edge between the current and the next node on Y and X axis
+/**
+ * This function will draw the right and bottom connecting edge
+ * of the given node.
+ *
+ * @param map
+ * @param node
  */
 void	draw_node(t_map *map, t_node *node)
 {

@@ -26,3 +26,9 @@ The data containing, represent the heights of the nodes, but also its colours by
 0  0          0  0 0
 ```
 Also, note that it does not have to end with `.fdf` unlike the example maps.
+
+## Bonuses
+This project contains a "bonus" part, which is the colour display, and the zoom.
+For the colours, this is explained above, in the "File Format" section. For zooming, simply scroll with your wheel or pad.
+You will notice that the height of the nodes is not constant according to the zoom... I know!
+There are other bonuses in this project, that I did not realize, free to you to fork the code.

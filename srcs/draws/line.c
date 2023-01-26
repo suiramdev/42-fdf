@@ -6,7 +6,7 @@
 /*   By: marvin <42.fr>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:29:11 by marvin            #+#    #+#             */
-/*   Updated: 2023/01/20 15:11:00 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/26 22:06:15 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 #include "types/color.h"
 #include "draws.h"
 #include <libft.h>
+
+/**
+ * Basically uses Bresenham's algorithm to draw a line.
+ * It also uses linear interpolation to go from one colour to another.
+ */
 
 static t_vector2	get_step(t_vector2 distance)
 {

@@ -6,7 +6,7 @@
 /*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:48:19 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/23 16:08:52 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/26 22:02:36 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
  * Handle map's mouse events 
  *
  * @param key_code An integer corresponding to the key actionned.
+ * @param x X position of the cursor
+ * @param y Y position of the cursor
  * @param fdf
  */
 int	mouse_hook(int key_code, int x, int y, t_fdf *fdf)

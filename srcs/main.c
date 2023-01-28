@@ -6,7 +6,7 @@
 /*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 22:19:44 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/26 21:38:03 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/28 17:59:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ int	main(int argc, char **argv)
 	mlx_hook(fdf->win, 33, 1L << 17, close_hook, fdf);
 	mlx_loop(fdf->mlx);
 	mlx_destroy_window(fdf->mlx, fdf->win);
+	mlx_destroy_image(fdf->mlx, fdf->map->image.ptr);
 	mlx_destroy_display(fdf->mlx);
-	empty_node(fdf->map->nodes);
 	free(fdf->mlx);
-	free(fdf->win);
+	empty_node(fdf->map->nodes);
 	free(fdf->map);
 	free(fdf);
 	return (EXIT_SUCCESS);

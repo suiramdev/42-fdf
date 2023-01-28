@@ -6,7 +6,7 @@
 /*   By: marvin <42.fr>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 18:28:08 by marvin            #+#    #+#             */
-/*   Updated: 2023/01/26 21:56:32 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/01/28 18:19:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,19 @@ static void	fill_map(t_map *map, char *line)
  */
 t_map	*load_map(char *path)
 {
+	int			fd;
 	t_map		*map;
 	char		*line;
-	int			fd;
 
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (NULL);
 	map = malloc(sizeof(t_map));
 	if (!map)
 		return (NULL);
 	map->nodes = NULL;
 	map->height = 0;
 	map->width = 0;
-	fd = open(path, O_RDONLY);
 	line = ft_gnl(fd);
 	while (line != NULL)
 	{

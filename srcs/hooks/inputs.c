@@ -6,7 +6,7 @@
 /*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:48:19 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/28 17:54:36 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/28 18:48:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int	mouse_hook(int key_code, int x, int y, t_fdf *fdf)
 {
 	(void)x;
 	(void)y;
-	if (key_code == 4)
+	if (key_code == 5)
 	{
 		fdf->map->tile_width -= 1;
 		fdf->map->tile_height = fdf->map->tile_width / 2;
 	}
-	if (key_code == 5)
+	if (key_code == 4)
 	{
 		fdf->map->tile_width += 1;
 		fdf->map->tile_height = fdf->map->tile_width / 2;

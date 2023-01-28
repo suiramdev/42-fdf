@@ -6,7 +6,7 @@
 ##   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        ##
 ##                                                +#+#+#+#+#+   +#+           ##
 ##   Created: 2023/01/06 22:19:57 by mnouchet          #+#    #+#             ##
-##   Updated: 2023/01/22 01:56:43 by mnouchet         ###   ########.fr       ##
+##   Updated: 2023/01/28 17:47:52 by marvin           ###   ########.fr       ##
 ##                                                                            ##
 ## ########################################################################## ##
 
@@ -84,7 +84,7 @@ DIR_DUP     = mkdir -p $(@D)
 
 $(LIBS_TARGET):
 	echo "→ Compiling $(@F)"
-	$(MAKE) $(MAKEFLAGS) -C $(@D)
+	$(MAKE) -C $(@D)
 
 $(BUILD_DIR)/%.o: $(SRCS_DIR)/%.c
 	echo "→ Compiling $<"

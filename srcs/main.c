@@ -6,7 +6,7 @@
 /*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 22:19:44 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/28 18:17:36 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/06 18:10:16 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ static t_fdf	*init(char *path)
 		return (NULL);
 	fdf->map = load_map(path);
 	if (!fdf->map)
+	{
+		free(fdf);
 		return (NULL);
+	}
 	fdf->mlx = mlx_init();
 	if (!fdf->mlx)
 	{

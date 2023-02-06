@@ -6,7 +6,7 @@
 /*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 22:19:44 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/02/06 18:10:16 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/02/06 18:12:41 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int argc, char **argv)
 {
 	t_fdf	*fdf;
 
-	if (argc < 2)
+	if (argc != 2)
 		return (EXIT_FAILURE);
 	fdf = init(argv[1]);
 	if (!fdf)

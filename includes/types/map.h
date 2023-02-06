@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <42.fr>                             +#+  +:+       +#+        */
+/*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 02:15:40 by marvin            #+#    #+#             */
-/*   Updated: 2023/01/26 21:53:57 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/02/06 09:47:14 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct s_map
 	t_image	image;
 	int		tile_width;
 	int		tile_height;
-	int		height_scale;
 }	t_map;
 
 t_map	*load_map(char *path);

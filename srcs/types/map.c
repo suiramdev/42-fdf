@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <42.fr>                             +#+  +:+       +#+        */
+/*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 18:28:08 by marvin            #+#    #+#             */
-/*   Updated: 2023/01/28 18:45:23 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/06 09:46:58 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ t_map	*load_map(char *path)
 	close(fd);
 	map->tile_width = 100;
 	map->tile_height = 50;
-	map->height_scale = 2;
 	map->image.ptr = NULL;
 	return (map);
 }

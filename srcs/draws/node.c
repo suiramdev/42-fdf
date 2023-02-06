@@ -6,7 +6,7 @@
 /*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 01:48:15 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/01/26 22:03:55 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/02/06 09:47:26 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_vector2	convert_pos(t_map *map, t_node *node)
 		map->image.width / 2,
 		map->image.height / 2 - (map->height * map->tile_height) / 2
 	};
-	offset.y -= node->pos.z * map->height_scale;
+	offset.y -= node->pos.z * 2;
 	return ((t_vector2){
 		offset.x + (node->pos.x - node->pos.y) * map->tile_width / 2,
 		offset.y + (node->pos.x + node->pos.y) * map->tile_height / 2

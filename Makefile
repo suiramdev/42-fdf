@@ -6,7 +6,7 @@
 #    By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/06 22:19:57 by mnouchet          #+#    #+#              #
-#    Updated: 2023/02/06 16:22:16 by mnouchet         ###   ########.fr        #
+#    Updated: 2023/02/06 18:09:03 by mnouchet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,6 +82,8 @@ DIR_DUP     = mkdir -p $(@D)
 # fclean		remove .o + binary
 # re			remake default goal
 
+all: $(NAME)
+
 $(LIBS_TARGET):
 	echo "→ Compiling $(@F)"
 	$(MAKE) -C $(@D)
@@ -90,8 +92,6 @@ $(BUILD_DIR)/%.o: $(SRCS_DIR)/%.c
 	echo "→ Compiling $<"
 	$(DIR_DUP)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@ 
-
-all: $(NAME)
 
 $(NAME): $(LIBS_TARGET) $(OBJS)
 	$(CC) $(LDFLAGS) $(OBJS) $(LDLIBS) -o $(NAME)

@@ -6,7 +6,7 @@
 /*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 22:19:44 by mnouchet          #+#    #+#             */
-/*   Updated: 2023/02/06 18:12:41 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/02/09 14:32:45 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,45 +18,13 @@
 #include <stdio.h>
 #include <mlx.h>
 
-static t_fdf	*init(char *path)
-{
-	t_fdf	*fdf;
-
-	fdf = malloc(sizeof(t_fdf));
-	if (!fdf)
-		return (NULL);
-	fdf->map = load_map(path);
-	if (!fdf->map)
-	{
-		free(fdf);
-		return (NULL);
-	}
-	fdf->mlx = mlx_init();
-	if (!fdf->mlx)
-	{
-		empty_node(fdf->map->nodes);
-		free(fdf->map);
-		return (NULL);
-	}
-	fdf->win = mlx_new_window(fdf->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "fdf");
-	if (!fdf->win)
-	{
-		mlx_destroy_display(fdf->mlx);
-		free(fdf->mlx);
-		empty_node(fdf->map->nodes);
-		free(fdf->map);
-		return (NULL);
-	}
-	return (fdf);
-}
-
 int	main(int argc, char **argv)
 {
 	t_fdf	*fdf;
 
 	if (argc != 2)
 		return (EXIT_FAILURE);
-	fdf = init(argv[1]);
+	fdf = init_fdf(argv[1]);
 	if (!fdf)
 		return (EXIT_FAILURE);
 	mlx_loop_hook(fdf->mlx, render_map, fdf);

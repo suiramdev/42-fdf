@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <42.fr>                             +#+  +:+       +#+        */
+/*   By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 02:08:02 by marvin            #+#    #+#             */
-/*   Updated: 2023/01/22 01:06:26 by mnouchet         ###   ########.fr       */
+/*   Updated: 2023/02/09 14:32:30 by mnouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@ typedef struct s_fdf
 	void	*win;
 	t_map	*map;
 }	t_fdf;
+
+t_fdf	*init_fdf(char *path);
 
 #endif

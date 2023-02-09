@@ -6,7 +6,7 @@
 #    By: mnouchet <mnouchet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/06 22:19:57 by mnouchet          #+#    #+#              #
-#    Updated: 2023/02/06 18:09:03 by mnouchet         ###   ########.fr        #
+#    Updated: 2023/02/09 14:33:39 by mnouchet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,14 +41,15 @@ INCS		:= includes				\
 
 SRCS_DIR	:= srcs
 SRCS		:= main.c				\
+			   types/color.c		\
+			   types/node.c			\
+			   types/map.c			\
+			   types/fdf.c			\
 			   draws/line.c			\
 			   draws/pixel.c		\
 			   draws/node.c			\
 			   hooks/renders.c		\
-			   hooks/inputs.c		\
-			   types/color.c		\
-			   types/node.c			\
-			   types/map.c
+			   hooks/inputs.c
 
 SRCS		:= $(SRCS:%=$(SRCS_DIR)/%)
 
